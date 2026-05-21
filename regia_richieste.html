@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Pini - Controllo Regia</title>
+    
+    <link rel="icon" href="img/icon.png" type="image/png">
+    
+    <link rel="stylesheet" href="css/regia.css">
+</head>
+<body>
+
+<div class="system-menu" id="systemMenu" style="display: none;">
+    <button class="hamburger-btn" onclick="toggleMenu()">☰</button>
+    <div class="dropdown-content" id="myDropdown">
+        <button class="dropdown-item" onclick="toggleTheme(); toggleMenu();">Tema 🌙</button>
+        <button class="dropdown-item" onclick="eseguiLogout()">Esci 🚪</button>
+    </div>
+</div>
+
+<div id="loginScreen" class="login-overlay">
+    <div class="login-box">
+        <h2>Radio Pini</h2>
+        <h3>Regia</h3>
+        <form id="loginForm" onsubmit="eseguiLogin(event)">
+            <div class="login-group">
+                <label>Username</label>
+                <input type="text" id="userInput" required autocomplete="username">
+            </div>
+            <div class="login-group">
+                <label>Password</label>
+                <div class="pwd-wrapper">
+                    <input type="password" id="passInput" required>
+                    <button type="button" class="btn-eye" onclick="togglePassword()">MOSTRA</button>
+                </div>
+            </div>
+            <label class="remember-me">
+                <input type="checkbox" id="rememberCheck"> Ricorda username
+            </label>
+            <button type="submit" class="btn-login">Accedi al pannello</button>
+            <div id="errorBox" class="error-msg">Username o password errati</div>
+        </form>
+    </div>
+</div>
+
+<div class="container" id="mainContainer">
+    <div class="broadcast-header">
+        <div class="header-left">
+            <img class="agency-logo" src="img/aurum_hotels.png" alt="Logo Aurum_Hotels">
+            <div class="station-title">
+                <h1 class="main-title-requests">
+                    Richieste Live 
+                    <span id="queueCounter" class="badge-counter" style="display: none;">0</span>
+                </h1>
+                <h2 class="sub-title-station">
+                    <span class="badge-red" style="top: 0;">Pannello Regia Radio Pini</span>
+                </h2>
+            </div>
+        </div>
+        
+        <div class="header-right">
+            <div class="regia-clock" id="liveClock">00:00:00</div>
+            <div class="btn-area">
+                <button class="btn-history" onclick="apriStorico()">🗂️ Storico</button>
+                <button class="btn-clear-all" onclick="confermaCancellaTutto()">🗑️ Svuota</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table id="tabellaRichieste">
+            <thead>
+                <tr>
+                    <th style="width: 15%;">Persona</th>
+                    <th style="width: 22%;">Canzone</th>
+                    <th style="width: 33%;">Dedica / Messaggio</th>
+                    <th class="sortable" onclick="toggleOrdinamento()" style="width: 16%;">Data e Ora <span id="sortIcon">🔼</span></th>
+                    <th style="width: 14%; text-align: center;">Azione</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <tr><td colspan="5" class="empty-state">Sincronizzazione della consolle in corso...</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div id="modalStorico" class="modal-overlay">
+    <div class="modal-box modal-box-large">
+        <div class="storico-header">
+            <h2>Archivio Richieste</h2>
+            <button class="close-storico" onclick="chiudiStorico()">✖</button>
+        </div>
+        <div class="table-responsive" style="box-shadow: none;">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 20%;">Persona</th>
+                        <th style="width: 30%;">Canzone</th>
+                        <th style="width: 35%;">Dedica</th>
+                        <th style="width: 15%;">Ora</th>
+                    </tr>
+                </thead>
+                <tbody id="storicoBody">
+                    <tr><td colspan="4" class="empty-state">Nessun brano archiviato.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id="customModal" class="modal-overlay">
+    <div class="modal-box">
+        <div id="modalText" class="modal-text">Messaggio</div>
+        <div id="modalButtons" class="modal-buttons-wrapper"></div>
+    </div>
+</div>
+
+<script src="js/regia.js"></script>
+</body>
+</html>

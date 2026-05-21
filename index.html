@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Pini - Richieste</title>
+    <link rel="icon" href="img/icon.png" type="image/png">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+<div class="container">
+    <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">🌙</button>
+    <h1>Radio Pini</h1>
+    <div class="subtitle">Richiedi la tua canzone o invia una dedica!</div>
+    
+    <form id="requestForm">
+        <div class="form-group">
+            <label class="label">Nome *</label>
+            <input type="text" id="nome" placeholder="Inserisci il tuo nome" required>
+        </div>
+
+        <div class="form-group">
+            <label class="label">Canzone Richiesta *</label>
+            <input type="text" id="searchSong" placeholder="Cerca titolo o artista..." autocomplete="off" oninput="handleSearch(this)" onfocus="mostraRisultati()">
+            <div id="results" class="search-results"></div>
+            <div id="selectedTrack" class="selected-track">
+                <span id="trackName"></span>
+                <button type="button" class="clear-btn" onclick="clearSong()">X</button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="label">Dedica (Opzionale)</label>
+            <textarea id="dedica" placeholder="Scrivi un messaggio per la dedica..." oninput="autoResize(this)"></textarea>
+            
+            <button type="button" class="audio-toggle-btn" onclick="toggleAudioSection()">🎙️ Vuoi fare una dedica vocale? Clicca qui</button>
+            
+            <div id="audioWrapper" class="audio-controls-wrapper">
+                <div class="audio-header"></div>
+                <div class="timer-display" id="audioTimer">00:00 / 00:40</div>
+                <div id="recControls">
+                    <button type="button" id="recordBtn" class="record-btn" onclick="startRecording()">🎤 REGISTRA</button>
+                    <button type="button" id="stopBtn" class="stop-btn" onclick="stopRecording()">⏹ STOP</button>
+                </div>
+                <audio id="audioPlayback" class="audio-preview" controls controlsList="nodownload noplaybackrate"></audio>
+                <button type="button" id="deleteAudioBtn" class="delete-audio-btn" onclick="deleteAudio()">🗑️ Rimuovi audio</button>
+            </div>
+        </div>
+
+        <button type="submit" id="submitBtn">INVIA</button>
+        <div class="privacy-note">ℹ️Non salviamo dati personali oltre a quelli inseriti nel form.</div>
+    </form>
+</div>
+
+<div id="modal" class="modal-overlay">
+    <div class="modal-box">
+        <div id="modalText" class="modal-text"></div>
+        <button type="button" class="modal-btn" onclick="closeModal()">OK</button>
+    </div>
+</div>
+
+<script src="js/index.js"></script>
+</body>
+</html>
